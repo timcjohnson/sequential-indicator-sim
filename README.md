@@ -17,7 +17,7 @@ High-performance 3D sequential indicator simulation with Gaussian variogram for 
 Install from GitHub:
 
 ```bash
-git clone https://github.com/yourusername/sequential-indicator-sim.git
+git clone https://github.com/timcjohnson/sequential-indicator-sim.git
 cd sequential-indicator-sim
 pip install -r requirements.txt
 ```

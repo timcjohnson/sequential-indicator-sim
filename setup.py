@@ -14,7 +14,7 @@ setup(
     description="High-performance 3D sequential indicator simulation with Gaussian variogram",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/sequential-indicator-sim",
+    url="https://github.com/timcjohnson/sequential-indicator-sim",
     packages=find_packages(),
     package_dir={"": "src"},
     classifiers=[
