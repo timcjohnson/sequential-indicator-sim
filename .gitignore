@@ -59,6 +59,5 @@ venv.bak/
 
 # Output files
 *.npz
-*.txt
 results/
 output/
