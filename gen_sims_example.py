@@ -47,7 +47,7 @@ exit_code = sis.main([
 "--y-start", "0", "--y-end", "0.7366", "--y-num", "28",
 "--z-start", "0", "--z-end", "0.9652", "--z-num", "40",
 "--categories", "1,2,3",
-"--vrange-x", "5.", "--vrange-y", "5.0", "--vrange-z", "0.1",
+"--vrange-x", "10", "--vrange-y", "10", "--vrange-z", "0.05",
 "--seed", "43",
 "--search-radius-x", ".5",
 "--search-radius-y", ".5",
@@ -55,8 +55,8 @@ exit_code = sis.main([
 "--interp-x-num", "104",
 "--interp-y-num", "56",
 "--interp-z-num", "80",
-"--num-realizations", "20",
-"--num-cores", "20",
+"--num-realizations", "200",
+"--num-cores", "50",
 ])
 
 convert_npz_to_txt()
