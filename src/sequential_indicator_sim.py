@@ -1,16 +1,12 @@
-#!/usr/bin/env python3
-"""Sequential indicator simulation on a 3D grid with a Gaussian variogram."""
-
-from __future__ import annotations
 
 import argparse
-import math
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
-from typing import Dict, Iterable, List, Sequence, Tuple
+from typing import Dict, List, Sequence, Tuple
 
 import numpy as np
 from scipy.spatial import cKDTree
+
 
 
 def gaussian_variogram(h2: np.ndarray, nugget: float) -> np.ndarray:
@@ -245,14 +241,15 @@ def apply_interpolation(
 
 
 def write_output_npz(path: str, grid: np.ndarray, sim_cats: np.ndarray) -> None:
-    with open(path.replace('.npz', ''), 'wb') as f:
-        np.savez_compressed(
-            f,
-            x=grid[:, 0],
-            y=grid[:, 1],
-            z=grid[:, 2],
-            category=sim_cats
-        )
+    if not path.endswith('.npz'):
+        path = path + '.npz'
+    np.savez_compressed(
+        path,
+        x=grid[:, 0],
+        y=grid[:, 1],
+        z=grid[:, 2],
+        category=sim_cats
+    )
 
 
 def _run_single_realization(
@@ -296,7 +293,7 @@ def parse_categories(text: str) -> List[int]:
     return [int(p) for p in parts]
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Sequential indicator simulation with Gaussian variogram on a 3D grid",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -329,7 +326,7 @@ def main() -> int:
     parser.add_argument("--num-realizations", type=int, default=1, help="Number of simulation realizations to generate")
     parser.add_argument("--num-cores", type=int, help="Number of CPU cores to use for parallelization (default: all available)")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.known:
         known_xyz, known_cats = load_known_points(args.known)
